@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <style>
+        .content {
+          max-width: 500px;
+          margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+
+        <div class="content">
+            <h1>UPLOAD</h1>
+        <form id="my_form"  method="POST" action="/uploadFile" enctype="multipart/form-data" >
+
+            <table>
+                <tr>
+                    <td>Select a file to upload</td>
+                    <td><input type="file" name="file" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit" /></td>
+                </tr>
+            </table>
+
+        </form>
+        </div>
+</body>
+</html>
