@@ -2,13 +2,9 @@ package com.bycoders.test.service;
 
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Service
 public class ConverterValueFromFile {
@@ -23,19 +19,10 @@ public class ConverterValueFromFile {
 
     public LocalTime converterStringToTime(String timeString){
 
-        DateFormat formatter = new SimpleDateFormat("hhmmss");
-        Date date = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss");
 
-        try {
-            date = (Date) formatter.parse(timeString);
-            System.out.println(date);
-
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        LocalTime localTimeObj = LocalTime.parse(timeString, formatter);
+        return localTimeObj;
     }
 
 }
