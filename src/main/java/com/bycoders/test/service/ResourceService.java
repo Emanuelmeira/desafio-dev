@@ -2,6 +2,7 @@ package com.bycoders.test.service;
 
 import com.bycoders.test.domain.Operation;
 import com.bycoders.test.domain.enums.OperationType;
+import com.bycoders.test.repository.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +11,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 @Service
@@ -17,18 +20,28 @@ public class ResourceService {
 
     @Autowired
     private ConverterValueFromFile converterValueFromFile;
+    @Autowired
+    private OperationRepository operationRepository;
+
+    private List<Operation> operationListToPersist;
 
     private static final Double VALUE_TO_DOUBT = 100.00;
 
-
     public void processFile(MultipartFile file) throws IOException {
 
-        File currDir = new File(".");
-        String path = currDir.getAbsolutePath();
+        File currentDirectory = new File(".");
+        String path = currentDirectory.getAbsolutePath();
         var fileLocation = path.substring(0, path.length() - 1) + file.getOriginalFilename();
 
         Stream<String> lines = Files.lines(Paths.get(fileLocation));
-        lines.forEach(this::processLine);
+
+        operationListToPersist = new ArrayList<>();
+        lines.forEach( line -> {
+            var operation = processLine(line);
+            operationListToPersist.add(operation);
+        });
+
+        operationListToPersist.forEach(this::saveOperation);
     }
 
     private Operation processLine(String line) {
@@ -44,7 +57,10 @@ public class ResourceService {
         operation.setStoreOwnerOperation(line.substring(48,62));
         operation.setStoreNameOperation(line.substring(62,80));
         return operation;
+    }
 
+    private void saveOperation(Operation operation) {
+        operationRepository.save(operation);
     }
 
 }
