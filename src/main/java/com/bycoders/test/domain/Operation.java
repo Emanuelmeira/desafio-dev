@@ -97,4 +97,19 @@ public class Operation {
     public void setStoreNameOperation(String storeNameOperation) {
         this.storeNameOperation = storeNameOperation;
     }
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "id=" + id +
+                ", operationType=" + operationType +
+                ", dateOfOperation=" + dateOfOperation +
+                ", valueOfOperation=" + valueOfOperation +
+                ", cpf='" + cpf + '\'' +
+                ", card='" + card + '\'' +
+                ", timeOfOperation=" + timeOfOperation +
+                ", storeOwnerOperation='" + storeOwnerOperation + '\'' +
+                ", storeNameOperation='" + storeNameOperation + '\'' +
+                '}';
+    }
 }
