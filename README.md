@@ -1,3 +1,24 @@
+**Tecnologias:**
+
+Maven,
+Spring boot,
+Java 11,
+Docker compose,
+Postgres
+
+**Passos para executar o projeto:**
+
+1 - Na raiz do projeto executar "docker-compose up" para subir o banco postgres.
+2 - Baixar o projeto localmente e executar com a IDE de sua preferencia.
+
+**API**
+
+Para acessar a tela de upload basta acessar "http://localhost:8080"
+Quando o upload for concluido, uma pagina deve ser aberta informando o sucessso
+
+Para acessar a lista de operações: "http://localhost:8080/store" 
+
+
 # Desafio programação - para vaga desenvolvedor
 
 Por favor leiam este documento do começo ao fim, com muita atenção.
