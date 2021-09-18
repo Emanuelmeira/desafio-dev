@@ -14,10 +14,10 @@ public enum OperationType {
     DOC(8, "+"),
     RENT(9, "-");
 
-    private String value;
-    private Integer signal;
+    private final String signal ;
+    private final Integer value;
 
-    OperationType(Integer signal, String value) {
+    OperationType(Integer value, String signal) {
         this.value = value;
         this.signal = signal;
     }
@@ -25,8 +25,21 @@ public enum OperationType {
     public static OperationType getEnumFromNumType(int numOperation) {
 
         return Arrays.stream(OperationType.values())
-                .filter(operation -> operation.signal.equals(numOperation))
+                .filter(operation -> operation.value.equals(numOperation))
                 .findFirst()
                 .orElseThrow();
     }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public String getSignal() {
+        return signal;
+    }
+
+    public boolean getSignalLikeBoolean() {
+        return this.getSignal().equals("+");
+    }
+
 }
