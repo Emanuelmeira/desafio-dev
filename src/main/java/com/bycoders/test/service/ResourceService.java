@@ -26,6 +26,7 @@ public class ResourceService {
     private List<Operation> operationListToPersist;
 
     private static final Double VALUE_TO_DOUBT = 100.00;
+    private static final int VALUE_TO_DIVISION = -1;
 
     public void processFile(MultipartFile file) throws IOException {
 
@@ -48,15 +49,27 @@ public class ResourceService {
 
         var operation = new Operation();
 
-        operation.setOperationType(OperationType.getEnumFromNumType(Integer.parseInt(line.substring(0,1))));
+        var opType = OperationType.getEnumFromNumType(Integer.parseInt(line.substring(0,1)));
+        operation.setOperationType(opType);
+
+        var value = Double.parseDouble(line.substring(9,19)) / VALUE_TO_DOUBT;
+        var valueResolved = resolveValue(value, opType);
+        operation.setValueOfOperation(valueResolved);
+
         operation.setDateOfOperation(converterValueFromFile.converterStringToDate(line.substring(1,9)));
-        operation.setValueOfOperation(Double.parseDouble(line.substring(9,19)) / VALUE_TO_DOUBT);
         operation.setCpf(line.substring(19,30));
         operation.setCard(line.substring(30,42));
         operation.setTimeOfOperation(converterValueFromFile.converterStringToTime(line.substring(42,48)));
         operation.setStoreOwnerOperation(line.substring(48,62));
         operation.setStoreNameOperation(line.substring(62,80));
         return operation;
+    }
+
+    private Double resolveValue(Double value, OperationType opType) {
+        if(opType.getSignalLikeBoolean()){
+            return value;
+        }
+        return value * VALUE_TO_DIVISION;
     }
 
     private void saveOperation(Operation operation) {
