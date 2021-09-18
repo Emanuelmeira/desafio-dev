@@ -13,16 +13,14 @@ public class ConverterValueFromFile {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         var date = LocalDate.parse(dateString, formatter);
-
         return date;
     }
 
     public LocalTime converterStringToTime(String timeString){
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmmss");
-
-        LocalTime localTimeObj = LocalTime.parse(timeString, formatter);
-        return localTimeObj;
+        var time = LocalTime.parse(timeString, formatter);
+        return time;
     }
 
 }
