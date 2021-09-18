@@ -44,7 +44,7 @@ public class ResourceService {
         operationListToPersist.forEach(this::saveOperation);
     }
 
-    private Operation processLine(String line) {
+    public Operation processLine(String line) {
 
         var operation = new Operation();
 
@@ -64,7 +64,7 @@ public class ResourceService {
         return operation;
     }
 
-    private Double resolveValue(Double value, OperationType opType) {
+    public Double resolveValue(Double value, OperationType opType) {
         if(opType.getSignalLikeBoolean()){
             return value;
         }

@@ -24,7 +24,6 @@ public class ResourceController {
     @PostMapping(value = "/uploadFile")
     public String uploadFile(@RequestParam MultipartFile file) throws IOException {
         resourceService.processFile(file);
-
         return "uploadSuccess";
     }
 
